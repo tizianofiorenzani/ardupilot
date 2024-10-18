@@ -638,7 +638,8 @@ void AP_DDS_Client::on_topic(uxrSession* uxr_session, uxrObjectId object_id, uin
     (void) stream_id;
     (void) length;
     auto *external_control = AP::externalcontrol();
-   
+    // TODO: Replace this line before merging. I leave the Joystick control always enable to test the RC functionality.
+    // if (!external_control->is_enabled()) {
     if (!external_control->is_enabled() && object_id.id != topics[to_underlying(TopicIndex::JOY_SUB)].dr_id.id) {
         GCS_SEND_TEXT(MAV_SEVERITY_INFO, "%s Command rejected: External Control Disabled", msg_prefix);
         return;
